@@ -20,7 +20,7 @@ COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/package.json ./
 
-ARG PG_VERSION='16'
+ARG PG_VERSION='17'
 
 RUN apk add --update --no-cache postgresql${PG_VERSION}-client
 
