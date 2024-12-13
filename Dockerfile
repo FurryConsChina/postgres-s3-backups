@@ -12,7 +12,7 @@ RUN npm ci && \
     npm run build && \
     npm prune --production
 
-FROM node:20.11.1-alpine
+FROM node:22.12.0-alpine3.20
 
 WORKDIR /app
 
