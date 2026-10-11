@@ -33,3 +33,11 @@ A simple NodeJS application to backup your PostgreSQL database to S3 via a cron.
 - `SUPPORT_OBJECT_LOCK` - Enables support for buckets with object lock by providing an MD5 hash with the backup file.
 
 - `BACKUP_OPTIONS` - Add any valid pg_dump option, supported pg_dump options can be found [here](https://www.postgresql.org/docs/current/app-pgdump.html). Example: `--exclude-table=pattern`
+
+- `NODE_VERSION` - Specify a custom Node.js version to override the default version set in the Dockerfile.
+
+- `PG_VERSION` - Specify a custom PostgreSQL version to override the default version set in the Dockerfile.
+
+## Notes for Postgres 17
+
+If backing up a Postgres 17 database imported from Postgres 16, set `PG_VERSION=17` and `NODE_VERSION=22`.
