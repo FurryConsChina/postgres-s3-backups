@@ -18,7 +18,7 @@ A simple NodeJS application to backup your PostgreSQL database to S3 via a cron.
 
 - `BACKUP_CRON_SCHEDULE` - The cron schedule to run the backup on. Example: `0 5 * * *`
 
-- `AWS_S3_ENDPOINT` - The S3 custom endpoint you want to use. Applicable for 3-rd party S3 services such as Cloudflare R2 or Backblaze R2.
+- `AWS_S3_ENDPOINT` - The S3 custom endpoint you want to use. Applicable for 3-rd party S3 services such as Cloudflare R2 or Backblaze B2. Custom endpoints use `WHEN_REQUIRED` request checksums for compatibility with services that do not support automatic CRC checksums; the explicit MD5 used by `SUPPORT_OBJECT_LOCK` is preserved.
 
 - `AWS_S3_FORCE_PATH_STYLE` - Use path style for the endpoint instead of the default subdomain style, useful for MinIO. Default `false`
 
@@ -33,3 +33,11 @@ A simple NodeJS application to backup your PostgreSQL database to S3 via a cron.
 - `SUPPORT_OBJECT_LOCK` - Enables support for buckets with object lock by providing an MD5 hash with the backup file.
 
 - `BACKUP_OPTIONS` - Add any valid pg_dump option, supported pg_dump options can be found [here](https://www.postgresql.org/docs/current/app-pgdump.html). Example: `--exclude-table=pattern`
+
+- `NODE_VERSION` - Specify a custom Node.js version to override the default version set in the Dockerfile.
+
+- `PG_VERSION` - Specify a custom PostgreSQL version to override the default version set in the Dockerfile.
+
+## Notes for Postgres 17
+
+If backing up a Postgres 17 database imported from Postgres 16, set `PG_VERSION=17` and `NODE_VERSION=22`.
