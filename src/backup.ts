@@ -9,7 +9,7 @@ import os from "os";
 import { env } from "./env.js";
 import { createMD5 } from "./util.js";
 
-const uploadToS3 = async ({ name, path }: { name: string, path: string }) => {
+export const uploadToS3 = async ({ name, path }: { name: string, path: string }) => {
   console.log("Uploading backup to S3...");
 
   const bucket = env.AWS_S3_BUCKET;
@@ -23,6 +23,8 @@ const uploadToS3 = async ({ name, path }: { name: string, path: string }) => {
     console.log(`Using custom endpoint: ${env.AWS_S3_ENDPOINT}`);
 
     clientOptions.endpoint = env.AWS_S3_ENDPOINT;
+    // Some S3-compatible services reject the SDK's automatic CRC checksums.
+    clientOptions.requestChecksumCalculation = "WHEN_REQUIRED";
   }
 
   if (env.BUCKET_SUBFOLDER) {
