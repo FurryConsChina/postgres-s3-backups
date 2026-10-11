@@ -1,6 +1,6 @@
-ARG NODE_VERSION='22.12.0'
+ARG NODE_VERSION='22'
 
-FROM node:${NODE_VERSION}-alpine AS build
+FROM node:${NODE_VERSION}-alpine3.23 AS build
 
 ENV NPM_CONFIG_UPDATE_NOTIFIER=false
 ENV NPM_CONFIG_FUND=false
@@ -14,7 +14,7 @@ RUN npm ci && \
     npm run build && \
     npm prune --production
 
-FROM node:${NODE_VERSION}-alpine
+FROM node:${NODE_VERSION}-alpine3.23
 
 WORKDIR /app
 
@@ -22,7 +22,7 @@ COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/package.json ./
 
-ARG PG_VERSION='17'
+ARG PG_VERSION='18'
 
 RUN apk add --update --no-cache postgresql${PG_VERSION}-client
 
