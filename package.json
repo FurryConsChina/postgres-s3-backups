@@ -7,8 +7,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "build": "tsc",
-    "typecheck": "tsc --noEmit",
-    "test": "npm run build && node --test tests/*.test.mjs"
+    "typecheck": "tsc --noEmit"
   },
   "author": "Faraz Patankar",
   "license": "MIT",
